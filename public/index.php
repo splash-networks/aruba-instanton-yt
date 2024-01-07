@@ -3,8 +3,8 @@
 require 'header.php';
 include 'config.php';
 
-$_SESSION['url'] = 'http://portal.draytek.com:8001/cgi-bin/wifilogin.cgi?username=' . $_GET['client_mac'] . '&password=' . $_GET['client_mac'];
-$_SESSION['client_mac'] = $_GET['client_mac'];
+$_SESSION['post'] = $_GET['post'];
+$_SESSION['mac'] = $_GET['mac'];
 $_SESSION["user_type"] = "new";
 
 # Checking DB to see if user exists or not.

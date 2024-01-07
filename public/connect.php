@@ -3,14 +3,14 @@
 require 'header.php';
 include 'config.php';
 
-$mac = $_SESSION["client_mac"];
-$url = $_SESSION['url'];
-
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$email = $_POST['email'];
+$mac = $_SESSION["mac"];
+$post = $_SESSION['post'];
 
 if ($_SESSION["user_type"] == "new") {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+
     mysqli_query($con, "
     CREATE TABLE IF NOT EXISTS `$table_name` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,6 +62,21 @@ mysqli_close($con);
     </div>
 
 </div>
+
+<form id="form1" name="form1" method=POST action="https://<?php echo htmlspecialchars($post); ?>/cgi-bin/login">
+        <input name=user value="user1" type="hidden">
+        <input name=password value="pass1" type="hidden">
+        <input name=cmd value="authenticate" type="hidden">
+        <input name=session_timeout value="3600" type="hidden">
+</form>
+
+<script type="text/javascript">
+    window.onload = function () {
+        window.setTimeout(function () {
+            document.form1.submit();
+        }, 2000);
+    };
+</script>
 
 </body>
 </html>
